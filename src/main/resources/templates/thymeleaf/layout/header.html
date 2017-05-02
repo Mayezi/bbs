@@ -1,0 +1,33 @@
+<div class="header" xmlns:th="http://www.thymeleaf.org">
+    <div class="main">
+        <a class="logo" href="/" title="Fly">Talking</a>
+        <div class="nav">
+            <a class="nav-this" href="jie/index.html">
+                <i class="iconfont icon-wenda"></i>吐槽一下
+            </a>
+            <a href="" target="_blank">
+                <i class="iconfont icon-ui"></i>放松一下
+            </a>
+            <a href="" target="_blank">
+                <i class="iconfont icon-ui"></i>经验分享
+            </a>
+        </div>
+
+        <div class="nav-user">
+            <!-- 未登入状态 -->
+            <a class="unlogin" href="/login" th:if="${user==null}">
+                <i class="iconfont icon-touxiang"></i></a>
+            <span th:if="${user==null}"><a href="/login.html">登入</a><a href="/register.html">注册</a></span>
+            <!-- 登入后的状态 -->
+            <a class="avatar" th:href="@{|/user/${user.username}|}" th:if="${user!=null}">
+              <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" />
+              <cite th:text="${user.getUsername()}">贤心</cite>
+            </a>
+            <div class="nav" th:if="${user!=null}">
+              <a th:href="@{|/user/${user.username}|}"><i class="iconfont icon-shezhi"></i>设置</a>
+              <a href="/logout"><i class="iconfont icon-tuichu" style="top: 0; font-size: 22px;"></i>退出登录</a>
+            </div>
+
+        </div>
+    </div>
+</div>

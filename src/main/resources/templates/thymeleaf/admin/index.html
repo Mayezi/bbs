@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Talk King</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" href="/static/res/layui/css/layui.css" th:href="@{/res/layui/css/layui.css}"/>
+    <link rel="stylesheet" href="/static/res/css/global.css" th:href="@{/res/css/global.css}"/>
+    <script src="/layui/layui.js" th:href="@{/layui/layui.js}"></script>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="header">
+        <div class="main">
+            <a class="logo" href="/" title="Fly">Talking</a>
+            <div class="nav">
+                <a href=""><i class="iconfont">Talk King论坛后台管理</i></a>
+            </div>
+
+            <div class="nav-user">
+
+                <!-- 登入后的状态 -->
+                <a class="avatar" href="../user/index.html">
+                    <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0"/>
+                    <cite>贤心</cite>
+                    <i>VIP2</i>
+                </a>
+                <div class="nav">
+                    <a href="/user/set/"><i class="iconfont icon-shezhi"></i>设置</a>
+                    <a href="/user/logout/"><i class="iconfont icon-tuichu"
+                                               style="top: 0; font-size: 22px;"></i>注销登录</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="layui-side layui-bg-black">
+        <ul class="layui-nav layui-nav-tree" lay-filter="demo">
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;">内容管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">用户管理</a></dd>
+                    <dd><a href="javascript:;">帖子管理</a></dd>
+                    <dd><a href="javascript:;">回复管理</a></dd>
+                    <dd><a href="javascript:;">版主管理</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">论坛总览</a></li>
+            <li class="layui-nav-item"><a href="">关于论坛</a></li>
+        </ul>
+    </div>
+    <div class="layui-body">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+            <legend>垂直导航菜单</legend>
+        </fieldset>
+    </div>
+    <div class="layui-footer">
+        <p><a href="#">Talk King</a> 2017 &copy; <a href="http://www.mayezi.tk/">Mayezi</a> All Rights Reserved</p>
+        <p>
+            本站访问量<a>1000</a>您目前的访问IP为<a>127.0.0.1</a>
+        </p>
+    </div>
+</div>
+<script>
+    layui.use('element', function () {
+        var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  thymeleaf:
+  datasource:
+    url: jdbc:mysql://localhost:3306/talkbbs?useSSL=false&characterEncoding=utf-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  http:
+    encoding:
+      force: true
+site:
+  name: 吐槽论坛
+  intro: 吐槽是门手艺，笑对需要勇气，欢迎来到吐槽论坛！
+  baseUrl: http://localhost:8080/
+  staticUrl: http://localhost:8080/
+  pageSize: 20
+  sections:
+    - 吐槽一下
+    - 放松一下
+    - 经验分享
+  theme: thymeleaf
+  search: true

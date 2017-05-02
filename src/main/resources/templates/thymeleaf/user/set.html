@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="thymeleaf/layout/layout">
+<head>
+    <meta charset="utf-8"/>
+    <title>个人设置</title>
+</head>
+<body>
+<div layout:fragment="content" class="main fly-user-main layui-clear">
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
+        <li class="layui-nav-item">
+            <a th:href="@{|/user/${user.getUsername()}/home|}">
+                <i class="layui-icon">&#xe609;</i>
+                我的主页
+            </a>
+        </li>
+        <li class="layui-nav-item">
+            <a th:href="@{|/user/${user.getUsername()}|}">
+                <i class="layui-icon">&#xe612;</i>
+                用户中心
+            </a>
+        </li>
+        <li class="layui-nav-item layui-this">
+            <a th:href="@{/user/setting}">
+                <i class="layui-icon">&#xe620;</i>
+                基本设置
+            </a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="message.html">
+                <i class="layui-icon">&#xe611;</i>
+                我的消息
+            </a>
+        </li>
+    </ul>
+
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
+
+    <div class="fly-panel fly-panel-user" pad20="">
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <ul class="layui-tab-title" id="LAY_mine">
+                <li class="layui-this" lay-id="info">我的资料</li>
+            </ul>
+            <div class="layui-tab-content" style="padding: 20px 0;">
+                <div class="layui-form layui-form-pane layui-tab-item layui-show">
+                    <form method="post" th:action="@{/user/update}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <div class="layui-form-item">
+                            <label for="email" class="layui-form-label">个人邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="email" name="email" required="required" lay-verify="email"
+                                       autocomplete="off" th:value="${user.email}" class="layui-input"/>
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="user_url" class="layui-form-label">个人主页</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="user_url" name="user_url" required="required"
+                                       lay-verify="required"
+                                       autocomplete="off" th:value="${user.user_url}" class="layui-input"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="signature" class="layui-form-label">个性签名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="signature" name="signature" required="required"
+                                       lay-verify="required"
+                                       autocomplete="off" th:value="${user.signature}" class="layui-input"/>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">无个性，不签名</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="layui-btn" type="submit">确认修改</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <!--<div class="layui-form layui-form-pane layui-tab-item">
+                    <form action="/user/repass" method="post">
+                        <div class="layui-form-item">
+                            <label for="L_nowpass" class="layui-form-label">当前密码</label>
+                            <div class="layui-input-inline">
+                                <input type="password" id="L_nowpass" name="nowpass" required="required"
+                                       lay-verify="required"
+                                       autocomplete="off" class="layui-input"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="L_pass" class="layui-form-label">新密码</label>
+                            <div class="layui-input-inline">
+                                <input type="password" id="L_pass" name="pass" required="required" lay-verify="required"
+                                       autocomplete="off" class="layui-input"/>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">6到16个字符</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="L_repass" class="layui-form-label">确认密码</label>
+                            <div class="layui-input-inline">
+                                <input type="password" id="L_repass" name="repass" required="required"
+                                       lay-verify="required"
+                                       autocomplete="off" class="layui-input"/>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="layui-btn" key="set-mine" type="submit">确认修改</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="layui-form layui-form-pane layui-tab-item">
+                    <ul class="app-bind">
+                        <li class="fly-msg app-havebind">
+                            <i class="iconfont icon-qq"></i>
+                            <span>已成功绑定，您可以使用QQ帐号直接登录Fly社区，当然，您也可以</span>
+                            <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
+
+                            &lt;!&ndash; <a href="" onclick="layer.msg('正在绑定微博QQ', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
+                            <span>，即可使用QQ帐号登录Fly社区</span> &ndash;&gt;
+                        </li>
+                        <li class="fly-msg">
+                            <i class="iconfont icon-weibo"></i>
+                            &lt;!&ndash; <span>已成功绑定，您可以使用微博直接登录Fly社区，当然，您也可以</span>
+                            <a href="javascript:;" class="acc-unbind" type="weibo_id">解除绑定</a> &ndash;&gt;
+
+                            <a href="" class="acc-weibo" type="weibo_id"
+                               onclick="layer.msg('正在绑定微博', {icon:16, shade: 0.1, time:0})">立即绑定</a>
+                            <span>，即可使用微博帐号登录Fly社区</span>
+                        </li>
+                    </ul>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

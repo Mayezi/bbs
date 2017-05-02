@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="thymeleaf/layout/layout">
+<head>
+    <meta charset="utf-8"/>
+    <title>全部帖子</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="wrap">
+        <div class="content" style="margin-right:0">
+            <div class="fly-tab">
+        <span>
+          <a href="" class="tab-this">全部</a>
+          <a href="">未结帖</a>
+          <a href="">已采纳</a>
+          <a href="">精帖</a>
+          <a href="../user/index.html">我的帖</a>
+        </span>
+                <form action="http://cn.bing.com/search" class="fly-search">
+                    <i class="iconfont icon-sousuo"></i>
+                    <input class="layui-input" autocomplete="off" placeholder="搜索内容，回车跳转" type="text" name="q"/>
+                </form>
+                <a href="add.html" class="layui-btn jie-add">发布问题</a>
+            </div>
+
+            <ul class="fly-list" th:include="thymeleaf/components/topics :: topics(page=${page.page})"></ul>
+
+
+            <div style="text-align: center">
+                <div class="layui-main" th:include="thymeleaf/components/pagination :: pagination(page=${page})"></div>
+                <!--<div class="laypage-main"><span class="laypage-curr">1</span><a href="/jie/page/2/">2</a><a
+                        href="/jie/page/3/">3</a><a href="/jie/page/4/">4</a><a
+                        href="/jie/page/5/">5</a><span>…</span><a href="/jie/page/148/" class="laypage-last" title="尾页">尾页</a><a
+                        href="/jie/page/2/" class="laypage-next">下一页</a></div>-->
+            </div>
+            <P th:text="${page.items}"></P>
+            <p th:text="'currentPage:'+${page.getNumber()}+'totalPages:'+${page.getTotalPages()}"></p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

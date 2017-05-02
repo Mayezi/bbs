@@ -1,0 +1,20 @@
+<div th:fragment="topics(page)">
+    <li class="fly-list-li" th:each="topic : ${page.getContent()}">
+            <a th:href="@{/user/(${topic.user.username})}" class="fly-list-avatar">
+                <img src="../res/images/avatar/default.png" alt=""/>
+            </a>
+            <h2 class="fly-tip">
+                <a th:href="@{|/topic/${topic.id}|}" th:text="${topic.title}"></a>
+            </h2>
+            <p>
+                <span><a th:href="@{|/user/${topic.user.username}|}" th:text="${topic.user.username}">mayezi</a></span>
+                <span th:text="${topic.postTime}">1小时前</span>
+                <span th:text="${topic.tab}">layui框架综合</span>
+                <span class="fly-list-hint">
+              <i class="iconfont" title="回答">&#xe60c;</i> <a th:text="${topic.replyNum}"></a>
+              <i class="iconfont" title="人气">&#xe60b;</i> <a th:text="${topic.viewNum}"></a>
+            </span>
+            </p>
+        </li>
+</div>
+

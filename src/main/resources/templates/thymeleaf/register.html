@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="thymeleaf/layout/layout">
+<head>
+    <meta charset="utf-8"/>
+    <title>Layui</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="fly-panel fly-panel-user" pad20="">
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li><a href="login.html">登入</a></li>
+                <li class="layui-this">注册</li>
+            </ul>
+            <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-form layui-form-pane">
+                        <div th:if="${errors}" th:text="${errors}" style="color: red"></div>
+                        <form method="post" th:action="@{/register}">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <div class="layui-form-item">
+                                <label  class="layui-form-label">用户名</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="username" name="username" required="required"
+                                           lay-verify="required" autocomplete="off" class="layui-input"/>
+                                </div>
+                                <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label  class="layui-form-label">密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" id="password" name="password" required="required"
+                                           lay-verify="required" autocomplete="off" class="layui-input"/>
+                                </div>
+                                <div class="layui-form-mid layui-word-aux">6到16个字符</div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label  class="layui-form-label">确认密码</label>
+                                <div class="layui-input-inline">
+                                    <input type="password" id="repassword" name="repassword" required="required"
+                                           lay-verify="required" autocomplete="off" class="layui-input"/>
+                                </div>
+                            </div>
+                            <!--<div class="layui-form-item">
+                                <label for="L_vercode" class="layui-form-label">人类验证</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="L_vercode" name="vercode" required="required"
+                                           lay-verify="required" placeholder="请回答后面的问题" autocomplete="off"
+                                           class="layui-input"/>
+                                </div>
+                                <div class="layui-form-mid">
+                                    <span style="color: #c00;">{{d.vercode}}</span>
+                                </div>
+                            </div>-->
+                            <div class="layui-form-item">
+                                <button class="layui-btn" type="submit">立即注册</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

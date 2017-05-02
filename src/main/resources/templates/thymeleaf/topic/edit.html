@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="thymeleaf/layout/layout">
+<head>
+    <meta charset="utf-8"/>
+    <title>编辑帖子</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="fly-panel" pad20="">
+    <h2 class="page-title">编辑帖子</h2>
+    <div class="layui-form layui-form-pane">
+      <form th:action="@{/topic/save}" method="post">
+        <div class="layui-form-item">
+          <label for="L_title" class="layui-form-label" >标题</label>
+          <div class="layui-input-block">
+            <input type="text" id="L_title" name="title" required="required" lay-verify="required" autocomplete="off" class="layui-input"/>
+          </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+          <div class="layui-input-block">
+            <textarea class="layui-textarea" id="L_content" name="content" required="required" lay-verify="required" placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+          </div>
+          <label for="L_content" class="layui-form-label" style=" top: -2px;">描述</label>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <label class="layui-form-label">所在类别</label>
+            <div class="layui-input-block">
+              <select lay-verify="required" name="tab" id="tab">
+                  <option th:each="section : ${sections}" th:text="${section}"
+                          th:value="${section}"></option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-inline">
+              <label for="L_vercode" class="layui-form-label">人类验证</label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_vercode" name="vercode" required="required" lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input"/>
+              </div>
+              <div class="layui-form-mid">
+                  <span style="color: #c00;">1+1=?</span>
+              </div>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <button class="layui-btn" type="submit">立即发布</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

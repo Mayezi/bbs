@@ -1,0 +1,6 @@
+<!-- Pagination Bar -->
+<div th:fragment='pagination(page)' th:each="item : ${page.items}">
+    <span th:text="${item}"></span>
+   <!-- <span  th:if="${item.current}" th:text="${item.number}" class="laypage-curr"></span>
+    <span th:if="${not item.current}" th:text="${item.number}"></span>-->
+</div>

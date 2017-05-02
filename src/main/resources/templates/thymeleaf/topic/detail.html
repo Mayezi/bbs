@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="thymeleaf/layout/layout">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="${topic.title}"></title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="wrap">
+        <div class="content detail">
+            <div class="fly-panel detail-box">
+                <h1 th:text="${topic.title}">文章标题</h1>
+                <div class="fly-tip fly-detail-hint" data-id="{{rows.id}}">
+                    <span th:if="${topic.top}"><span class="fly-tip-stick">置顶帖</span></span>
+                    <span th:if="${topic.excellent}"><span class="fly-tip-jing">精帖</span></span>
+
+                    <span>未结贴</span>
+                    <div class="fly-list-hint">
+                        <i class="iconfont" title="回答">&#xe60c;</i> <a th:text="${topic.replyNum}"></a>
+                        <i class="iconfont" title="人气">&#xe60b;</i> <a th:text="${topic.viewNum}"></a>
+                    </div>
+                </div>
+                <div class="detail-about">
+                    <a class="jie-user" href="">
+                        <img src="http://tp4.sinaimg.cn/1345566427/180/5730976522/0" alt=""/>
+                        <cite>
+                            <span th:text="${topic.user.username}">贤心</span>
+                            <em th:text="|发布时间:${topic.postTime}|"></em>
+                        </cite>
+                    </a>
+                    <div class="detail-hits" data-id="{{rows.id}}">
+                        <span class="layui-btn layui-btn-mini jie-admin" type="edit"><a href="/jie/edit/{{rows.id}}">编辑此贴</a></span>
+                        <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">删除此贴</span>
+                        <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">置顶</span>
+                        <span class="layui-btn layui-btn-mini jie-admin " type="collect" data-type="add">加精</span>
+                        <!--<span class="layui-btn layui-btn-mtopic jie-admin  layui-btn-danger" type="collect" data-type="add">取消收藏</span>-->
+                    </div>
+                </div>
+
+                <div class="detail-body photos" style="margin-bottom: 20px;">
+                    <p th:text="${topic.content}">
+                    </p>
+                </div>
+            </div>
+
+            <div class="fly-panel detail-box" style="padding-top: 0;">
+                <a name="comment"></a>
+                <ul class="jieda photos" id="jieda" >
+                    <li data-id="12" class="jieda-daan" th:each="reply : ${replies}">
+                        <a name="item-121212121212"></a>
+                        <div class="detail-about detail-about-reply">
+                            <a class="jie-user" href="">
+                                <img src="../../res/images/avatar/default.png" alt=""/>
+                                <cite>
+                                    <i th:text="${reply.user.username}">纸飞机</i>
+                                    <!-- <em>(楼主)</em>
+                                    <em style="color:#5FB878">(管理员)</em>
+                                    <em style="color:#FF9E3F">（活雷锋）</em>
+                                    <em style="color:#999">（该号已被封）</em> -->
+                                </cite>
+                            </a>
+                            <div class="detail-hits">
+                                <span th:text="|回复时间:${reply.replyTime}|">回复时间</span>
+                            </div>
+                            <!--<i class="iconfont icon-caina" title="最佳答案"></i>-->
+                        </div>
+                        <div class="detail-body jieda-body">
+                            <p th:text="${reply.content}">么么哒</p>
+                        </div>
+                        <div class="jieda-reply">
+                            <span class="jieda-zan zanok" type="zan"><i class="iconfont icon-zan"></i><em th:text="${reply.likeNum}">12</em></span>
+                            <span type="reply"><i class="iconfont icon-svgmoban53"></i>回复</span>
+                            <!-- <div class="jieda-admin">
+                              <span type="edit">编辑</span>
+                              <span type="del">删除</span>
+                              <span class="jieda-accept" type="accept">采纳</span>
+                            </div> -->
+                        </div>
+                    </li>
+
+
+
+                    <!-- <li class="fly-none">没有任何回答</li> -->
+                </ul>
+
+                <div class="layui-form layui-form-pane">
+                    <form th:action="@{/reply/save}" method="post">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                        <input type="hidden" th:value="${topic.id}" th:name="topicId"/>
+                        <div class="layui-form-item layui-form-text">
+                            <div class="layui-input-block">
+                                <textarea id="L_content" th:name="content" required="required" lay-verify="required"
+                                          placeholder="我来吐槽一下" class="layui-textarea fly-editor"
+                                          style="height: 150px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="layui-btn" type="submit">提交回答</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
